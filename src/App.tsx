@@ -3,10 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import Main from "./components/Main";
 import Header from "./components/Header";
+import Cart from "./components/Cart";
 import Test from "./components/Test";
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, RootState } from './state';
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   const cart = useSelector((state: RootState) => state.cart);
@@ -15,28 +17,13 @@ function App() {
   // const {addToCart, removeFromCart, clearCart} = bindActionCreators(actionCreators.addToCart, dispatch);
   const { addToCart, removeFromCart, clearCart } = actionCreators;
 
-  const product = {
-    id: 1,
-    name: 'test',
-    price: 10,
-    quantity: 13,
-    url: "https://picsum.photos/200/300"
-  };
-
   return (
     <div className="App">
-      {/* <Test />
-      <h1>{cart?.length}</h1>
-      <button onClick={() => addToCart(product)(dispatch)}>Add to cart</button>
-      <button onClick={() => removeFromCart(1)(dispatch)}>Remove from cart</button>
-      <button onClick={() => clearCart()(dispatch)}>clearCart</button> */}
-
-
       <Header />
-      <Main />
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<Main />} />
-      </Routes> */}
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
     </div>
   );
 }

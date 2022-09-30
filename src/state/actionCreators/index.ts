@@ -1,8 +1,9 @@
 // action creators are functions that dispatch actions
 
-import { Product, CartAction, ListAllProductsAction } from "../actions";
+import { CartAction, ListAllProductsAction, SearchProductsAction } from "../actions";
 import { ActionType } from "../actionTypes";
 import { Dispatch } from "redux";
+import { Product } from "../types";
 
 export const addToCart = (product: Product) => {
     return (dispatch: Dispatch<CartAction>) => {
@@ -27,3 +28,9 @@ export const listAllProducts = () => {
         dispatch({ type: ActionType.LIST_ALL_PRODUCTS, payload: [] });
     }
 };
+
+export const searchProducts = (query: string) => {
+    return (dispatch: Dispatch<SearchProductsAction>) => {
+        dispatch({ type: ActionType.SEARCH_PRODUCTS, query });
+    }
+}

@@ -1,0 +1,63 @@
+.main-container {
+    padding: 24px 10px;
+}
+
+table,
+td,
+th {
+    border: 1px solid;
+    padding: 10px 5px;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid black;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 40px auto;
+}
+
+table {
+    border-collapse: collapse;
+    flex: 65% 0; /* flex-basis flex-grow */
+}
+
+.price-details {
+    flex: 25% 0; /* flex-basis flex-grow */
+}
+
+.price-details .adjust-price {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.price-details .adjust-price span {
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    table {
+        flex: 100%;
+    }
+
+    .price-details {
+        flex: 100%;
+    }
+
+    .price-details {
+        margin: 40px auto;
+        width: 100%;
+    }
+}

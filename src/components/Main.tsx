@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, useCallback, useEffect } from 'react';
 import { useDispatch } from "react-redux";
 // import { listProducts } from "../redux/ProductAction";
 import { useSelector } from "react-redux";
 import "./styles/Main.css";
-import { useEffect } from "react";
 import { RootState } from '../state';
 import { actionCreators } from '../state/';
 
@@ -11,23 +10,30 @@ function Main() {
   const dispatch = useDispatch();
   const { cart, product: productsList } = useSelector((state: RootState) => state);
 
+
+
   console.log("MainComponent productData: ", productsList);
   console.log("MainComponent cartData: ", cart);
 
   // console.log("PROUDCT DATA: ", productData);
-  const { addToCart, removeFromCart, clearCart, listAllProducts } = actionCreators;
+  const { addToCart, clearCart, listAllProducts } = actionCreators;
+
+  const fetchAllProducts = useCallback(() => {
+    listAllProducts()(dispatch);
+  }, []);
 
   useEffect(() => {
-    actionCreators.listAllProducts()(dispatch);
-  }, []);
+    fetchAllProducts();
+  }, [fetchAllProducts]);
+
 
   return (
     <div className="main-container">
       <button onClick={() => clearCart()(dispatch)}>Clear cart</button>
-      <button onClick={() => listAllProducts()(dispatch)} title="Refresh List all products">
+      <button onClick={() => fetchAllProducts()} title="Refresh List all products">
         <img
           src="https://img.icons8.com/ios-glyphs/240/1A1A1A/refresh--v1.png"
-          alt="refresا-icon"
+          alt="refresh-icon"
           height={12}
           width={12}
         ></img>
@@ -53,11 +59,6 @@ function Main() {
                 <button onClick={() => addToCart(product)(dispatch)}>
                   Add to cart
                 </button>
-                {cart.includes(product) && (
-                  <button onClick={() => removeFromCart(product?.id)(dispatch)}>
-                    Remove from cart
-                  </button>
-                )}
               </div>
             </div>
           );

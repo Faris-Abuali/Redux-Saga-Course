@@ -1,13 +1,13 @@
 
-import { CartAction, Product } from "../actions";
+import { CartAction } from "../actions";
 import { ActionType } from "../actionTypes";
+import { Product } from "../types";
 
 const initialState: any = [];
 
 const reducer = (payload = initialState, action: CartAction) => {
     // the action is the object received from the action function:
-    console.log("cartReducer invoked: action = ", action);
-    
+
     switch (action.type) {
         case ActionType.ADD_TO_CART:
             return [...payload, action.payload];
